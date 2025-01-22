@@ -1,0 +1,75 @@
+# Основные запреты при заморозке
+blocked-actions:
+    commands: true
+    block-break: true
+    block-place: true
+    interaction: true
+    inventory: true
+
+# Лог в консоль (true/false)
+log-to-console: true
+
+# Команды, которые выполняются по истечению срока заморозки
+end-freeze-commands:
+    - "ban %player% Причина: окончание заморозки."
+    - "kick %player% Заморозка истекла!"
+
+messages:
+    # Основные сообщения
+    usageMain: "&e FG ▶ &fИспользуйте /fg <команда> ..."
+    noPermission: "&c FG ▶ &fУ вас нет прав для использования этой команды."
+    unknownCommand: "&e FG ▶ &f&fНеизвестная команда. Используйте /fg <freeze|radius|reload|unfreeze|unfreezeall|list|check> ..."
+    reloadConfig: "&a FG ▶ &fКонфигурация плагина перезагружена!"
+    playerNotFound: "&c FG ▶ &fИгрок не найден или не в сети."
+    onlyInGame: "&c FG ▶ &fЭту команду может использовать только игрок в игре."
+
+    # Freeze
+    usageFreeze: "&e FG ▶ &fИспользование: /fg freeze <игрок> [время в секундах]"
+    incorrectFreezeTime: "&c FG ▶ &fНеверный формат времени. Используйте /fg freeze <игрок> [время в секундах]"
+    freezeCaster: "&a FG ▶ &fВы заморозили игрока %player% на %time% сек."
+    freezeCasterUnlimited: "&a FG ▶ &fВы заморозили игрока %player% безлимитно."
+    freezeTarget: "&b FG ▶ &fВы были заморожены Администратором ! Не покидайте игру, время: %time% сек."
+    freezeTargetUnlimited: "&b FG ▶ &fВы были заморожены Администратором! Не покидайте игру."
+    notifyFreeze: "&e FG ▶ &f %sender% заморозил игрока %extra%."
+    freezeEnded: "&aВаша заморозка завершена! Спасибо за терпение."
+
+    # Radius
+    usageRadius: "&e FG ▶ &fИспользование: /fg radius <радиус>"
+    incorrectNumber: "&c FG ▶ &fНеверный формат числа. Введите правильный радиус."
+    freezeTargetRadius: "&b FG ▶ &fВы были заморожены по радиусу Администратором!"
+    freezeRadiusResult: "&a FG ▶ &fЗаморожено %count% игроков в радиусе %radius%."
+    notifyFreezeRadius: "&e FG ▶ &f %sender% заморозил игроков в радиусе %extra%."
+
+    # Unfreeze
+    usageUnfreeze: "&e FG ▶ &fИспользование: /fg unfreeze <игрок>"
+    notFrozen: "&e FG ▶ &fИгрок %player% не заморожен."
+    unfreezeCaster: "&a FG ▶ &fВы разморозили игрока %player%."
+    unfreezeTarget: "&a FG ▶ &fВас разморозили!"
+    unfreezeAllCaster: "&a FG ▶ &fВы разморозили всех игроков."
+    notifyUnfreeze: "&e FG ▶ &f%sender% разморозил игрока %extra%."
+    notifyUnfreezeAll: "&e FG ▶ &f%sender% разморозил всех игроков."
+
+    # List
+    noFrozenPlayers: "&e FG ▶ &fНет замороженных игроков."
+    frozenPlayersHeader: "&a FG ▶ &fСписок замороженных игроков:"
+
+    # Check
+    usageCheck: "&e FG ▶ &fИспользование: /fg check <игрок>"
+    frozenUnlimited: "&a FG ▶ &fИгрок %player% заморожен безлимитно."
+    frozenTime: "&a FG ▶ &fИгрок %player% заморожен. Оставшееся время: %time% секунд."
+
+    # Блокировки при заморозке
+    blockedCommand: "&c FG ▶ &fВы не можете использовать команды во время заморозки!"
+    blockedBlockBreak: "&c FG ▶ &fВы не можете ломать блоки во время заморозки!"
+    blockedBlockPlace: "&c FG ▶ &fВы не можете ставить блоки во время заморозки!"
+    blockedInteraction: "&c FG ▶ &fВы не можете взаимодействовать во время заморозки!"
+    blockedInventory: "&c FG ▶ &fВы не можете использовать инвентарь во время заморозки!"
+
+   #Список доступных команд
+    helpCommands:
+        - "&e/fg freeze <игрок> [время] &7-&f заморозить игрока"
+        - "&e/fg unfreeze <игрок> &7-&f разморозить игрока"
+        - "&e/fg radius <радиус> &7-&f заморозить всех в радиусе"
+        - "&e/fg list &7-&f список замороженных игроков"
+        - "&e/fg check <игрок> &7-&f проверить статус заморозки"
+        - "&e/fg reload &7-&f перезагрузить конфигурацию"
