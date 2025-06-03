@@ -15,16 +15,13 @@ public final class FrostGuard extends JavaPlugin {
 
         saveDefaultConfig();
 
-        // Дополнительно: обновляем конфиг для новых параметров
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        // Инициализация
         this.frostLogs = new FrostLogs(this);
         frostListener = new FrostListener(this);
         getServer().getPluginManager().registerEvents(frostListener, this);
 
-        // Регистрация команд
         getCommand("fg").setExecutor(new Commands(this));
 
         getLogger().info("FrostGuard плагин активирован!");
