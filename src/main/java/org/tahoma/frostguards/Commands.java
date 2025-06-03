@@ -90,7 +90,6 @@ public class Commands implements CommandExecutor {
                 break;
 
             default:
-                // Если подкоманда не найдена, выводим помощь
                 showHelpCommands(sender);
                 break;
         }
@@ -98,9 +97,6 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
-    /**
-     * Вывод списка доступных команд из config.yml (messages.helpCommands).
-     */
     private void showHelpCommands(CommandSender sender) {
         List<String> helpList = plugin.getConfig().getStringList("messages.helpCommands");
         if (helpList == null || helpList.isEmpty()) {
@@ -124,7 +120,7 @@ public class Commands implements CommandExecutor {
             return;
         }
 
-        long freezeTime = -1; // -1 значит безлимит
+        long freezeTime = -1;
         if (args.length >= 3) {
             try {
                 freezeTime = Long.parseLong(args[2]);
@@ -136,20 +132,16 @@ public class Commands implements CommandExecutor {
 
         FreezeManager.freezePlayer(target, freezeTime);
 
-        // Сообщение отправителю
         String msgKey = (freezeTime == -1) ? "messages.freezeCasterUnlimited" : "messages.freezeCaster";
         sendConfigMessage(sender, msgKey, "%player%", target.getName(), "%time%", String.valueOf(freezeTime));
 
-        // Сообщение замороженному
         String freezeMsgKey = (freezeTime == -1) ? "messages.freezeTargetUnlimited" : "messages.freezeTarget";
         sendConfigMessage(target, freezeMsgKey, "%time%", String.valueOf(freezeTime));
 
         target.playSound(target.getLocation(), Sound.BLOCK_GLASS_BREAK, 1, 1);
 
-        // Логирование
         plugin.getFrostLogs().logAction(sender, "заморозил игрока", target.getName(), freezeTime);
 
-        // Уведомление модераторам
         notifyModerators(sender, "messages.notifyFreeze", target.getName());
     }
 
@@ -187,7 +179,6 @@ public class Commands implements CommandExecutor {
             }
         }
 
-        // Итоговое сообщение об общем числе замороженных
         String message = plugin.getConfig().getString("messages.freezeRadiusResult", "&aЗаморожено %count% игроков в радиусе %radius%.");
         message = message.replace("%count%", String.valueOf(count));
         message = message.replace("%radius%", String.valueOf(radius));
@@ -217,12 +208,10 @@ public class Commands implements CommandExecutor {
 
         FreezeManager.unfreezePlayer(target);
 
-        // Сообщение отправителю
         String unfreezeCaster = plugin.getConfig().getString("messages.unfreezeCaster", "&aВы разморозили игрока %player%.");
         unfreezeCaster = unfreezeCaster.replace("%player%", target.getName());
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', unfreezeCaster));
 
-        // Сообщение целевому игроку
         sendConfigMessage(target, "messages.unfreezeTarget");
 
         target.playSound(target.getLocation(), Sound.BLOCK_GLASS_BREAK, 1, 1);
@@ -287,9 +276,6 @@ public class Commands implements CommandExecutor {
         }
     }
 
-    /**
-     * Отправка сообщения из config.yml с поддержкой цветов и заменой плейсхолдеров.
-     */
     private void sendConfigMessage(CommandSender sender, String path, String... placeholders) {
         String msg = plugin.getConfig().getString(path);
         if (msg == null || msg.isEmpty()) return;
