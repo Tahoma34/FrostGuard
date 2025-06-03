@@ -30,7 +30,6 @@ public class FrostLogs {
                 sdf.format(new Date()), senderName, action, targetName, timeInfo);
         logToFile(message);
 
-        // Опциональный лог в консоль
         boolean logToConsole = plugin.getConfig().getBoolean("log-to-console", true);
         if (logToConsole) {
             plugin.getLogger().info(message);
