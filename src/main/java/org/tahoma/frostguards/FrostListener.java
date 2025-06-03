@@ -23,10 +23,8 @@ public class FrostListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (FreezeManager.isFrozen(player)) {
-            // Отмена перемещения — возвращаем игрока на прежнюю позицию
             event.setTo(event.getFrom());
 
-            // Визуальный эффект (например, частицы снега)
             player.getWorld().spawnParticle(Particle.SNOWBALL, player.getLocation(), 5, 0.5, 1, 0.5, 0.01);
         }
     }
@@ -101,7 +99,6 @@ public class FrostListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        // Если игрок заморожен и вышел, можно добавить логику (например, логирование)
         if (FreezeManager.isFrozen(player)) {
             plugin.getFrostLogs().logToFile("Игрок " + player.getName() + " вышел из игры во время заморозки.");
         }
